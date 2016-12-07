@@ -1,0 +1,17 @@
+check host api.X.com with address localhost
+        if failed port 80 protocol http and
+                request "path" for 3 cycles
+                then alert
+        if failed port 80 protocol http and
+                request "path" status = 404 for 3 cycles
+                then alert
+
+set mail-format {
+        from: root@
+        subject: $SERVICE $EVENT at $DATE
+        message: $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION.
+}
+
+set alert 
+
+set mailserver localhost port 25

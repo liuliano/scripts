@@ -1,0 +1,20 @@
+check system localhost
+    if loadavg (1min) > 4 then alert
+    if loadavg (5min) > 2 then alert
+    if memory usage > 75% then alert
+    if cpu usage (user) > 80% then alert
+    if cpu usage (system) > 50% then alert
+    if cpu usage (wait) > 40% then alert
+
+check filesystem rootfs with path / #Alert if low on disk space.
+    if space usage > 90% then alert
+
+set mail-format {
+        from: root@
+        subject: $SERVICE $EVENT at $DATE
+        message: $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION.
+}
+
+set alert 
+
+set mailserver localhost port 25

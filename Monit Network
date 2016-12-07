@@ -1,0 +1,14 @@
+check network eth0 with address X.X.X.X
+        if failed link then alert
+        if changed link then alert
+        if saturation > 80% then alert
+
+set mail-format {
+        from: root@
+        subject: $SERVICE $EVENT at $DATE
+        message: $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION.
+}
+
+set alert
+
+set mailserver localhost port 25
